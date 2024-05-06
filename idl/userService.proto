@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package pb;
+option go_package = "./;pb";
+
+message UserModel {
+  // @inject_tag: json:"id" form:"id"
+  uint32 id = 1;
+  // @inject_tag: json:"userName" form:"userName"
+  string userName = 2;
+  // @inject_tag: json:"createdAt" form:"createdAt"
+  int64 createdAt = 3;
+  // @inject_tag: json:"updatedAt" form:"updatedAt"
+  int64 updatedAt = 4;
+  // @inject_tag: json:"deletedAt" form:"deletedAt"
+  int64 deletedAt = 5;
+}
+
+message UserReq {
+  // @inject_tag: json:"userName" form:"userName"
+  string userName = 1;
+  // @inject_tag: json:"password" form:"password"
+  string password = 2;
+  // @inject_tag: json:"passwordConfirm" form:"passwordConfirm"
+  string passwordConfirm = 3;
+}
+
+message UserResp {
+  // @inject_tag: json:"userDetail" form:"userDetail"
+  UserModel userDetail = 1;
+  // @inject_tag: json:"code" form:"code"
+  uint32 code = 2;
+}
+
+service UserService {
+  rpc UserLogin(UserReq) returns(UserResp);
+  rpc UserRegister(UserReq) returns(UserResp);
+}
